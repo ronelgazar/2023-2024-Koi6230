@@ -55,7 +55,11 @@ public class DrivingSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    swerveDrive.drive(new ChassisSpeeds(0, 0, 0));
+    swerveDrive.setChassisSpeeds(new ChassisSpeeds(0,0,0));
+  }
+
+  public void resetEncoder() {
+    swerveDrive.resetEncoders();
   }
 
   @Override

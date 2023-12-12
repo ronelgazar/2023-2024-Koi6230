@@ -45,12 +45,14 @@ public class RobotContainer {
 
   private final MovementCommand movement = new MovementCommand(drivingSubsystem, () -> -movementStick.getX(), () -> movementStick.getY(), () -> movementStick.getZ());
 
+  
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the trigger bindings
     drivingSubsystem.setDefaultCommand(movement);
+    drivingSubsystem.resetEncoder();
 
     configureBindings();
   }
