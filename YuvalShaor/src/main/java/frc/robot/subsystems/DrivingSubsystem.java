@@ -42,7 +42,7 @@ public class DrivingSubsystem extends SubsystemBase {
   private DrivingSubsystem() {
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try {
-      SwerveDrive swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);
+      swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);
     } catch (IOException e) {
       e.printStackTrace();
       throw new RuntimeException("Wrong file or directory of config");
@@ -50,13 +50,16 @@ public class DrivingSubsystem extends SubsystemBase {
   }
 
   public void drive(double xSpeed, double ySpeed, double rotationSpeed, boolean fieldRelative) {
-    // swerveDrive.driveFieldOriented(new ChassisSpeeds(xSpeed, ySpeed, rotationSpeed));
     swerveDrive.drive(new Translation2d(xSpeed, ySpeed), rotationSpeed, fieldRelative, false);
 
   }
 
   public void stop() {
-    swerveDrive.drive(new ChassisSpeeds(0, 0, 0));
+    swerveDrive.setChassisSpeeds(new ChassisSpeeds(0,0,0));
+  }
+
+  public void resetEncoder() {
+    swerveDrive.resetEncoders();
   }
 
   @Override
