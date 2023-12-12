@@ -12,14 +12,9 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import swervelib.SwerveDrive;
 import swervelib.imu.NavXSwerve;
-import swervelib.parser.SwerveControllerConfiguration;
-import swervelib.parser.SwerveDriveConfiguration;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
@@ -31,7 +26,6 @@ public class DrivingSubsystem extends SubsystemBase {
   double maximumSpeed = Units.feetToMeters(17.6);
   File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(), "swerve");
 
-  // DifferentialDrive m_drive = new DifferentialDrive(left, right);
   /** Creates a new DrivingSubsystem. */
   public static DrivingSubsystem getInstance() {
     if (instance == null)
@@ -43,6 +37,7 @@ public class DrivingSubsystem extends SubsystemBase {
     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try {
       swerveDrive = new SwerveParser(swerveJsonDirectory).createSwerveDrive(maximumSpeed);
+      swerveDrive.setMotorIdleMode(true);
     } catch (IOException e) {
       e.printStackTrace();
       throw new RuntimeException("Wrong file or directory of config");
