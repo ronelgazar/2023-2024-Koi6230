@@ -7,7 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.MovmentCommand;
+import frc.robot.commands.MovementCommand;
 import frc.robot.subsystems.DrivingSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import swervelib.SwerveDrive;
@@ -43,7 +43,7 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private Joystick movementStick = new Joystick(0);
 
-  private final MovmentCommand movement = new MovmentCommand(drivingSubsystem, () -> -movementStick.getX(), () -> movementStick.getY(), () -> movementStick.getZ());
+  private final MovementCommand movement = new MovementCommand(drivingSubsystem, () -> -movementStick.getX(), () -> movementStick.getY(), () -> movementStick.getZ());
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -75,10 +75,5 @@ public class RobotContainer {
 
   }
 
-  private DrivingSubsystem createDrivingSubsystem() {
-    SwerveModuleConfiguration smc = parseSwerveModuleConfiguration(new File("C:\\Users\\tamir\\Desktop\\YuvalShahor\\YuvalShaor\\src\\main\\java\\frc\\robot\\swerve\\swervedrive.json"));
-    SwerveDriveConfiguration sdc = new SwerveDriveConfiguration(, null, false, null, null)
-    DrivingSubsystem drivingSubsystem = new DrivingSubsystem();
-}
 
 }

@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DrivingSubsystem;
 
-public class MovmentCommand extends CommandBase {
+public class MovementCommand extends CommandBase {
   DrivingSubsystem drivingSubsystem;
   private Supplier<Double> driveX;
   private Supplier<Double> driveY;
   private Supplier<Double> rotate;
 
-  /** Creates a new movment. */
-  public MovmentCommand(DrivingSubsystem dSubsystem, Supplier<Double> driveX, Supplier<Double> driveY ,Supplier<Double> rot) {
+  /** Creates a new movement. */
+  public MovementCommand(DrivingSubsystem dSubsystem, Supplier<Double> driveX, Supplier<Double> driveY ,Supplier<Double> rot) {
     this.drivingSubsystem = dSubsystem;
     this.rotate = rot;
     this.driveX = driveX;
@@ -34,7 +34,7 @@ public class MovmentCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivingSubsystem.drive(0.5*driveX.get(), 0.5*driveY.get(), 0.5*rotate.get() );
+    drivingSubsystem.drive(Math.pow(driveX.get(),3), Math.pow(driveY.get(),3), Math.pow(rotate.get(),3),false);
   }
 
   // Called once the command ends or is interrupted.
